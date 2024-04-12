@@ -76,7 +76,7 @@ class RedactingFormatter(logging.Formatter):
         return filter_datum(
                 self.fields,
                 RedactingFormatter.REDACTION,
-                record.msg,
+                super(RedactingFormatter, self).format(record),
                 RedactingFormatter.SEPARATOR
                 )
 
