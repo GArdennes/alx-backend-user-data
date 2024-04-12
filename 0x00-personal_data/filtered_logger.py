@@ -85,8 +85,8 @@ def main():
     """
     Main implementation
     """
-    fields = ""
-    columns = fields.splilt(",")
+    fields = "name,email,phone,ssn,password,ip,last_login,user_agent"
+    columns = fields.split(",")
     query = "SELECT {} FROM users;".format(fields)
     info_logger = get_logger()
     connection = get_db()
@@ -110,3 +110,7 @@ def main():
                     )
             log_record = logging.LogRecord(*args)
             info_logger.handle(log_record)
+
+
+if __name__ == "__main__":
+    main()
