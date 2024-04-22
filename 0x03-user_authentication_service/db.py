@@ -54,5 +54,18 @@ class DB:
             query = query.filter(getattr(User, key) == value)
         user = query.first()
         if not user:
-           raise NoResultFound()
+            raise NoResultFound()
         return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """Method locates the user to update.
+        """
+        try:
+            user = self.find_user_by(id=user_id)
+        except NoResultFound:
+            return None
+        for key, value in kwargs.items():
+            if not hasattr(user, key):
+                raise ValueError()
+        setattr(user, key, value)
+        self._session.commit()
